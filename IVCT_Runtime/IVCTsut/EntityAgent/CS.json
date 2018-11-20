@@ -1,0 +1,6 @@
+{
+	"id" 			: 	"EntityAgent",
+	"description"	:	"EntityAgent system under federate for IVCT demonstration",
+	"vendor"		:	"OODA Technologies / DRDC Atlantics",
+	"badge"			:	["TS_EntityIntegrityChecker"]
+}
