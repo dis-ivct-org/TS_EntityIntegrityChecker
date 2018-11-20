@@ -34,7 +34,7 @@ The test flow is  the same for each testCase and is described in the following d
 6. TestRunner reads the scenario document and validates that all the entities requested respect the scenario document.
 7. Enact judgment.
 
-INSERT IMAGE HERE
+![IntegrityCheckerFlow](https://github.com/MSG134/TS_EntityIntegrityChecker/raw/master/IntegrityChecker.png "IntegrityCheckerFlow")
 
 Note: 
 Only 2 dead reckoning algorithms as been implemented: DRM_FPW and DRM_RVW
