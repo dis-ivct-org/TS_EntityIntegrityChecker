@@ -3,9 +3,10 @@
 The test validates the integrity of Base Entities instances published by the System under Test (SuT). The information validated is based on a shared predefined scenario between both the IVCT_TestRunner and the SuT. The currently in use scenario describes multiple base entities taken from the GRIM-RPR standard which are then loaded through a csv file.
 
 The TestSuite is divided in 3 testcases which will verify the following elements of a BaseEntity instance:
-- EntityIdentifier
-- EntityType
-- Spatial
+- EntityIdentifier: The testcase verifies that each entity from the FAD finds a match in ID with the discovered entities.
+- EntityType: The testcase verifies that each ID-matched entities present the same Type information.
+- Spatial: The testcase verifies that each ID-matched entities present the same Spatial information.
+
 
 ## Requirement 
 The use of entities from the GRIM-RPR FOM. 
