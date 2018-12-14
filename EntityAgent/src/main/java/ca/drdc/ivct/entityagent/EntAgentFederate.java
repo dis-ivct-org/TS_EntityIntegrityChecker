@@ -20,6 +20,7 @@ package ca.drdc.ivct.entityagent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class EntAgentFederate {
         EntityAgentConfig noConfig = null;
         try {
             controller.execute(noConfig);
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             logger.error(e.getMessage(), e);
         }
 

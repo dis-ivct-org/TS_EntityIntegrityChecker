@@ -3,8 +3,7 @@ apply plugin: 'application'
 mainClassName = 'ca.drdc.ivct.entityagent.EntAgentFederate'
 
 dependencies {
-    compile    project(':TS_EntityIntegrityChecker')
-
+    compile project(':IVCT_HLA_BaseEntity')
     switch (rti) {
         case "prti1516e":
             logger.warn (':EntAgent:pRTI is used. Make sure pRTI is installed on target machine to run EntAgentFederate')

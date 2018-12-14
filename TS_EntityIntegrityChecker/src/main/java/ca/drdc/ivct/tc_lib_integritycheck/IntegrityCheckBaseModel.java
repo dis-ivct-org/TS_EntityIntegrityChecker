@@ -24,11 +24,12 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 
+import ca.drdc.ivct.hla.coders.entitytypecoders.EntityIdentifierStructCoder;
+import ca.drdc.ivct.hla.coders.entitytypecoders.EntityTypeStructCoder;
+import ca.drdc.ivct.hla.coders.spatialcoders.SpatialCoder;
 import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.coders.entitytypecoders.EntityIdentifierStructCoder;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.coders.entitytypecoders.EntityTypeStructCoder;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.coders.spatialcoders.SpatialCoder;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.entitytype.EntityType;
+import ca.drdc.ivct.tc_lib_integritycheck.baseentity.EntityIdentifier;
+import ca.drdc.ivct.tc_lib_integritycheck.baseentity.EntityType;
 import de.fraunhofer.iosb.tc_lib.IVCT_RTIambassador;
 import de.fraunhofer.iosb.tc_lib.IVCT_TcParam;
 import de.fraunhofer.iosb.tc_lib.TcFailed;
@@ -189,7 +190,7 @@ public class IntegrityCheckBaseModel extends IVCT_BaseModel {
         if (!testPassed) {
             throw new TcFailed("Test failed due to errors in entity(ies) or absent/unrecognized entity(ies) : "+failedStringBuilder.toString()) ;
         } else {
-            logger.info(lineSeparator+"TEST IS COMPLETED SUCCESFULLY."+lineSeparator);
+            logger.info("{} TEST IS COMPLETED SUCCESFULLY. {}",lineSeparator,lineSeparator);
             return false;
         }
     }
@@ -356,7 +357,7 @@ public class IntegrityCheckBaseModel extends IVCT_BaseModel {
                 EntityIdentifierStructCoder entityIdentifierStructCoder = new EntityIdentifierStructCoder(ivctRti.getEncoderFactory());
                 EntityTypeStructCoder entityTypeStructCoder = new EntityTypeStructCoder(ivctRti.getEncoderFactory());
                 
-                String entityIdentifier = entityIdentifierStructCoder.decodeToIdDotString(theAttributes.get(this.attrEntityIdentifier));
+                EntityIdentifier entityIdentifier = entityIdentifierStructCoder.decodeToType(theAttributes.get(this.attrEntityIdentifier));
                 EntityType entityType = entityTypeStructCoder.decodeToType(theAttributes.get(this.attrEntityType));
                 
                 baseEntity.setEntityIdentifier(entityIdentifier);

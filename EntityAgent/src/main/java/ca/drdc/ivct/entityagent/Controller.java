@@ -20,6 +20,7 @@ package ca.drdc.ivct.entityagent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import ca.drdc.ivct.entityagent.hlamodule.HlaInterface;
 import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.CSVReader;
+import ca.drdc.ivct.tc_lib_integritycheck.utils.CSVReader;
 import hla.rti1516e.AttributeHandleValueMap;
 import hla.rti1516e.ObjectInstanceHandle;
 import hla.rti1516e.exceptions.FederateNotExecutionMember;
@@ -47,7 +48,7 @@ public class Controller {
     private EntityAgentConfig config;
     private Map<ObjectInstanceHandle, AttributeHandleValueMap> baseEntityInstanceMap;
 
-    public void execute(EntityAgentConfig configInput) throws IOException {
+    public void execute(EntityAgentConfig configInput) throws IOException, ParseException {
 
         if (configInput == null) {
             try {
@@ -80,7 +81,7 @@ public class Controller {
         for (BaseEntity baseEntity : fad) {
             try {
                 hlaInterface.createBaseEntity(baseEntity);
-                logger.info("Created BaseEntity {}", baseEntity.toString());
+                logger.info("Created BaseEntity {}", baseEntity);
             } catch (FederateNotExecutionMember | RestoreInProgress | SaveInProgress | NotConnected | RTIinternalError e) {
                 logger.error("Error creating a base Entity", e);
             }

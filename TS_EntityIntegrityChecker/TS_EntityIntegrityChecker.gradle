@@ -16,6 +16,7 @@ dependencies {
             logger.warn (':TS_EntityIntegrityChecker:No RTI is used. TS_EntityIntegrityChecker will not be runnable')
             compile group: 'msg134-ivct-framework', name: 'IEEE1516e', version: ivctVersion
     }
+    compile        project(':IVCT_HLA_BaseEntity')
 
     compile        group: 'org.apache.commons',    name: 'commons-math', version: '2.2'
     compile        group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'

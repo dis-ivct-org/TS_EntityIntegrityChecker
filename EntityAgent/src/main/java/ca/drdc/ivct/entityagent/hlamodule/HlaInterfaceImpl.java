@@ -27,12 +27,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ca.drdc.ivct.entityagent.Controller;
-import ca.drdc.ivct.entityagent.hlamodule.rpr.RprClass;
-import ca.drdc.ivct.entityagent.hlamodule.rpr.RprPlatformPackage;
+import ca.drdc.ivct.hla.coders.entitytypecoders.EntityIdentifierStructCoder;
+import ca.drdc.ivct.hla.coders.entitytypecoders.EntityTypeStructCoder;
+import ca.drdc.ivct.hla.coders.spatialcoders.SpatialCoder;
+import ca.drdc.ivct.hlamodule.rpr.RprClass;
+import ca.drdc.ivct.hlamodule.rpr.RprPlatformPackage;
 import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.coders.entitytypecoders.EntityIdentifierStructCoder;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.coders.entitytypecoders.EntityTypeStructCoder;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.coders.spatialcoders.SpatialCoder;
 import hla.rti1516e.AttributeHandle;
 import hla.rti1516e.AttributeHandleSet;
 import hla.rti1516e.AttributeHandleValueMap;

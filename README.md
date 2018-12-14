@@ -45,15 +45,14 @@ Only 2 dead reckoning algorithms as been implemented: DRM_FPW and DRM_RVW
 SiSut : Simulated System Under Test provided as EntityAgent in the repository.  
 Sut : System Under Test
 
-------
-The folder IVCT_Runtime contains the required configuration to run the testcases using the IVCT test runner.
-More information on this subject can be found in the wiki (https://github.com/MSG134/IVCT_Runtime/wiki)
 
 Note: 
 Only 2 dead reckoning algorithm as been implemented: DRM (FPW) and DRM(RVW)
 
 How to Build
 -------
+First, follow the instructions to install the [IVCT Framework](https://github.com/MSG134/IVCT_Framework) if it is not already done. Make sure the compiled files are present on the local m2 repository as this project is dependent on them.
+
 ./gradlew clean  
 ./gradlew build  
 ./gradlew eclipse  
@@ -64,6 +63,21 @@ folder (That will appear after the above commands) needs to be dragged into IVCT
 
 The badge and the SuT information are already present in the IVCT_Runtime
 
+## Package Contents
+The different folders contained in this project refer to different capabilities and features. Refer to this section for a description of each.
 
+### EntityAgent
+Contains the SiSuT project. The list of published entities comes from a .csv file refered in src/main/resources/config/config.properties. This project contains dependencies to the IVCT_HLA_BaseEntityModel.
 
+### GrimRprFomObject
+Represents the generic data model for GRIM-RPR compliant java objects. No dependencies.
 
+### IVCT_HLA_BaseEntity
+Contains the necessary libraries to translate java objects into HLA compliant objects and vice-versa. This project contains dependencies to the GrimRprFomObject.
+
+### IVCT_RunTime
+The folder IVCT_Runtime contains the required configuration to run the testcases using the IVCT test runner.
+More information on this subject can be found in the wiki (https://github.com/MSG134/IVCT_Runtime/wiki)
+
+### TS_EntityIntegrityChecker
+This project contains the main testing logic. This project contains dependencies to the IVCT_HLA_BaseEntity and msg134-ivct-framework projects.

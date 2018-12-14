@@ -17,6 +17,7 @@
 package ca.drdc.ivct.tc_integritycheck;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import ca.drdc.ivct.tc_lib_integritycheck.CountdownTimer;
 import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckBaseModel;
 import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckTcParam;
 import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.CSVReader;
+import ca.drdc.ivct.tc_lib_integritycheck.utils.CSVReader;
 import de.fraunhofer.iosb.tc_lib.AbstractTestCase;
 import de.fraunhofer.iosb.tc_lib.IVCT_BaseModel;
 import de.fraunhofer.iosb.tc_lib.IVCT_LoggingFederateAmbassador;
@@ -90,8 +91,8 @@ public class BaseEntityIntegrityTC_0002 extends AbstractTestCase {
             if (fad.isEmpty()) {
                 throw new TcInconclusive("The FAD is empty.");
             }
-        } catch (IOException e) {
-            throw new TcInconclusive("Could not load the FAD.");
+        } catch (IOException | ParseException e) {
+            throw new TcInconclusive("Could not load the FAD.",e);
         }
 
         // Let five second to IVCT federation client to discover entity.

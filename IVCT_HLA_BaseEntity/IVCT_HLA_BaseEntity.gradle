@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+}
+
+dependencies {
+    compile project(':GrimRprFomObject')
+    switch (rti) {
+        case "prti1516e":
+            logger.warn (':TS_EntityIntegrityChecker:pRTI is used. Make sure pRTI is installed on target machine to run TS_EntityIntegrityChecker')
+            compileOnly files (rti_lib + "/" + rti_jar)
+            compile fileTree (dir: rti_lib, include: '*.jar')
+            break
+        case "mak":
+            logger.warn (':TS_EntityIntegrityChecker:MAK RTI is not configure. TS_EntityIntegrityChecker will not be runnable')
+        case "IEEE1516e":
+        default:
+            logger.warn (':TS_EntityIntegrityChecker:No RTI is used. TS_EntityIntegrityChecker will not be runnable')
+            compile group: 'msg134-ivct-framework', name: 'IEEE1516e', version: ivctVersion
+    }
+
+    runtime 'ch.qos.logback:logback-classic:1.1.3'
+    runtime 'ch.qos.logback:logback-core:1.1.3'
+
+    compile "org.slf4j:slf4j-api:1.7.10"
+    runtime "org.slf4j:jcl-over-slf4j:1.7.10"
+    runtime "org.slf4j:jul-to-slf4j:1.7.10"
+    runtime "org.slf4j:log4j-over-slf4j:1.7.10"
+}
