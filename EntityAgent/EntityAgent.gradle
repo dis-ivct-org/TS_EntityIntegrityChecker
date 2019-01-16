@@ -7,14 +7,15 @@ dependencies {
     switch (rti) {
         case "prti1516e":
             logger.warn (':EntAgent:pRTI is used. Make sure pRTI is installed on target machine to run EntAgentFederate')
-            compile fileTree (dir: rti_lib, include: '*.jar')
+            compileOnly files (rti_lib + "/" + rti_jar)
+            runtime fileTree (dir: rti_lib, include: '*.jar')
             break
         case "mak":
             logger.warn (':EntAgent:MAK RTI is not configure. EntAgentFederate will not be runnable')
         case "IEEE1516e":
         default:
             logger.warn (':EntAgent:No RTI is used. EntAgentFederate will not be runnable')
-            compile group: 'msg134-ivct-framework', name: 'IEEE1516e', version: ivctVersion
+            compileOnly group: 'msg134-ivct-framework', name: 'IEEE1516e', version: ivctVersion
 	}
 
     compile    libraries.slf4j_api
@@ -25,5 +26,6 @@ dependencies {
     runtime    libraries.slf4j_jcl_over_slf4j
     runtime    libraries.slf4j_jul_to_slf4j
     runtime    libraries.slf4j_log4j_over_slf4j
+
 }
 

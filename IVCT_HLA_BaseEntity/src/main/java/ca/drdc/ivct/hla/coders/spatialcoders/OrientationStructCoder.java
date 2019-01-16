@@ -17,7 +17,7 @@
 
 package ca.drdc.ivct.hla.coders.spatialcoders;
 
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.spatial.element.OrientationStruct;
+import ca.drdc.ivct.baseentity.spatial.element.OrientationStruct;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAfixedRecord;

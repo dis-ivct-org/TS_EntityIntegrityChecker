@@ -23,11 +23,11 @@ import java.util.List;
 
 import org.slf4j.Logger;
 
+import ca.drdc.ivct.baseentity.BaseEntity;
 import ca.drdc.ivct.tc_lib_integritycheck.CountdownTimer;
 import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckBaseModel;
 import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckTcParam;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.utils.CSVReader;
+import ca.drdc.ivct.utils.CSVReader;
 import de.fraunhofer.iosb.tc_lib.AbstractTestCase;
 import de.fraunhofer.iosb.tc_lib.IVCT_BaseModel;
 import de.fraunhofer.iosb.tc_lib.IVCT_LoggingFederateAmbassador;

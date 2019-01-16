@@ -19,8 +19,8 @@ package ca.drdc.ivct.hla.coders.entitytypecoders;
 
 import java.util.StringTokenizer;
 
+import ca.drdc.ivct.baseentity.EntityIdentifier;
 import ca.drdc.ivct.hla.coders.UnsignedDecoder;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.EntityIdentifier;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAfixedRecord;

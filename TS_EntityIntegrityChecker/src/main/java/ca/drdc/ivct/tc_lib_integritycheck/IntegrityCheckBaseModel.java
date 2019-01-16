@@ -24,12 +24,12 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 
+import ca.drdc.ivct.baseentity.BaseEntity;
+import ca.drdc.ivct.baseentity.EntityIdentifier;
+import ca.drdc.ivct.baseentity.EntityType;
 import ca.drdc.ivct.hla.coders.entitytypecoders.EntityIdentifierStructCoder;
 import ca.drdc.ivct.hla.coders.entitytypecoders.EntityTypeStructCoder;
 import ca.drdc.ivct.hla.coders.spatialcoders.SpatialCoder;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.EntityIdentifier;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.EntityType;
 import de.fraunhofer.iosb.tc_lib.IVCT_RTIambassador;
 import de.fraunhofer.iosb.tc_lib.IVCT_TcParam;
 import de.fraunhofer.iosb.tc_lib.TcFailed;

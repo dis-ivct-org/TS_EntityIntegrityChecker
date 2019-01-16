@@ -22,8 +22,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 
+import javax.naming.ConfigurationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import hla.rti1516e.exceptions.RTIexception;
 
 public class EntAgentFederate {
 
@@ -34,27 +38,25 @@ public class EntAgentFederate {
     private Controller controller;
 
     public void run() {
-        
+
         this.controller = new Controller();
         EntityAgentConfig noConfig = null;
         try {
             controller.execute(noConfig);
-        } catch (IOException | ParseException e) {
-            logger.error(e.getMessage(), e);
-        }
 
-        System.out.println("Press Q and Enter to exit");
-        BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-        while (true) {
-            try {
+            System.out.println("Press Q and Enter to exit");
+            BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+            while (true) {
                 String in = inputReader.readLine();
                 if (in.equalsIgnoreCase("q")) {
                     stop();
                     break;
                 }
-            } catch (IOException e) {
-                logger.error(e.getMessage(), e);
             }
+
+        } catch (IOException | ParseException | ConfigurationException | RTIexception e) {
+            logger.error(e.getMessage(), e);
+            stop();
         }
     }
 

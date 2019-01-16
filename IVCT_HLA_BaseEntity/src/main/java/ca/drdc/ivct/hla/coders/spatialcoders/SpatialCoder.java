@@ -16,10 +16,10 @@
  *******************************************************************************/
 package ca.drdc.ivct.hla.coders.spatialcoders;
 
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.spatial.SpatialFPStruct;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.spatial.SpatialRVStruct;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.spatial.SpatialRepresentation;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.spatial.element.DeadReckoningAlgorithm;
+import ca.drdc.ivct.baseentity.spatial.SpatialFPStruct;
+import ca.drdc.ivct.baseentity.spatial.SpatialRVStruct;
+import ca.drdc.ivct.baseentity.spatial.SpatialRepresentation;
+import ca.drdc.ivct.baseentity.spatial.element.DeadReckoningAlgorithm;
 import hla.rti1516e.encoding.DecoderException;
 import hla.rti1516e.encoding.EncoderFactory;
 import hla.rti1516e.encoding.HLAfixedRecord;

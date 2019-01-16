@@ -10,8 +10,10 @@ The TestSuite is divided in 3 testcases which will verify the following elements
 
 ## Requirement 
 The use of entities from the GRIM-RPR FOM. 
+
 The SuT and the IVCTtest use the same scenario document and are both connected to the same federation. The SuT has the capability to create the entities as requested in the .csv scenario.
 
+The environment variable IVCT\_CONF is define to the IVCT\_Runtime folder.
 
 ## TestCase
 
@@ -20,11 +22,16 @@ The TestCase flow is as follows:
 ### Precondition
 The SuT needs to connect to the federation and publish every entity in the scenario document. The Simulated System under test does the following steps before the execution of the test: 
 
-### SuT Steps
+### Test Steps
+
+##### The Sut steps
+The SuT should do the following operation. For development purpose only, a Simulated System Under Test (SiSut) called EntityAgent execute the following steps base on configuration added in the IVCT\_Runtime/IVCTsut folder.
+
 1. The SuT connects to the federation.
 2. The SuT register publishing of the Base Entities and the following attributes: EntityIdentifier, EntityType, Spatial in accordance to the FOM.
 3. The SuT reads the scenario document and publish the generated base entities instances listed in the scenario document.
 
+##### The main test steps
 The test flow is  the same for each testCase and is described in the following diagram:
 
 1. Operator starts the TestCase using the GUI or the UI then the TestRunner execute the testcase.
@@ -58,10 +65,11 @@ First, follow the instructions to install the [IVCT Framework](https://github.co
 ./gradlew eclipse  
 ./gradlew installDist  
 
-It is then important to copy and paste some files to the IVCT_Runtime folder. The TS_EntityIntegrityChecker folder in the /build/install 
-folder (That will appear after the above commands) needs to be dragged into IVCT_Runtime/TestSuites/.
+It is important to copy and paste some files to the IVCT\_Runtime folder.
+ - TS\_EntityIntegrityChecker/build/install/TS\_EntityIntegrityChecker/ folder needs to be copied into IVCT\_Runtime/TestSuites/.
+ - if you modified any element in the EntityAgent/src/main/resources/ folder, copy them into IVCT_Runtime/IVCTsut/EntityAgent/resources/
 
-The badge and the SuT information are already present in the IVCT_Runtime
+The badge and the SuT information should be in the IVCT_Runtime.
 
 ## Package Contents
 The different folders contained in this project refer to different capabilities and features. Refer to this section for a description of each.
@@ -72,7 +80,7 @@ Contains the SiSuT project. The list of published entities comes from a .csv fil
 ### GrimRprFomObject
 Represents the generic data model for GRIM-RPR compliant java objects. No dependencies.
 
-### IVCT_HLA_BaseEntity
+### IVCT\_HLA\_BaseEntity
 Contains the necessary libraries to translate java objects into HLA compliant objects and vice-versa. This project contains dependencies to the GrimRprFomObject.
 
 ### IVCT_RunTime

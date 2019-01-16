@@ -18,19 +18,19 @@
 package ca.drdc.ivct.entityagent;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.ConfigurationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ca.drdc.ivct.baseentity.BaseEntity;
 import ca.drdc.ivct.entityagent.hlamodule.HlaInterface;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.utils.CSVReader;
+import ca.drdc.ivct.utils.CSVReader;
 import hla.rti1516e.AttributeHandleValueMap;
 import hla.rti1516e.ObjectInstanceHandle;
 import hla.rti1516e.exceptions.FederateNotExecutionMember;
@@ -45,22 +45,17 @@ public class Controller {
     private static Logger logger = LoggerFactory.getLogger(Controller.class);
 
     private HlaInterface hlaInterface;
-    private EntityAgentConfig config;
     private Map<ObjectInstanceHandle, AttributeHandleValueMap> baseEntityInstanceMap;
 
-    public void execute(EntityAgentConfig configInput) throws IOException, ParseException {
+    public void execute(EntityAgentConfig config) throws ConfigurationException, IOException, ParseException, RTIexception {
 
-        if (configInput == null) {
-            try {
-                URL configFileUrl = this.getClass().getResource("/config/config.properties");
-                logger.info("Found config file at: {}", configFileUrl.getPath());
-                config = new EntityAgentConfig(configFileUrl.getFile());
-
-            } catch (IOException | URISyntaxException e) {
-                logger.error("Could not read EntityAgent config.properties", e);
+        if (config == null) {
+            String externalResourceFolder = System.getenv("IVCT_CONF");
+            if (externalResourceFolder == null) {
+                throw new ConfigurationException("IVCT_CONF is not defined");
             }
-        } else {
-            config = configInput;
+            config = new EntityAgentConfig(externalResourceFolder+"/IVCTsut/EntityAgent/resources");
+
         }
 
         hlaInterface = HlaInterface.Factory.newInterface(this);
@@ -68,10 +63,10 @@ public class Controller {
         baseEntityInstanceMap = new HashMap<>();
 
         try {
-            hlaInterface.start(config.getLocalSettingsDesignator(), config.getFom(), config.getFederationName(), config.getFederateName());
+            hlaInterface.start(config.getLocalSettingsDesignator(), config.getFom().getAbsolutePath(), config.getFederationName(), config.getFederateName());
         } catch (RTIexception e) {
             logger.error("Could not connect to the RTI using the local settings designator {}", config.getLocalSettingsDesignator(), e);
-            return;
+            throw e;
         }
 
         // Load all files in testcases folder. This constitutes the federation agreement document (FAD)

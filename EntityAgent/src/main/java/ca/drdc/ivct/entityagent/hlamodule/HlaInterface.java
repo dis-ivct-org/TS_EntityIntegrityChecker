@@ -17,8 +17,8 @@
 
 package ca.drdc.ivct.entityagent.hlamodule;
 
+import ca.drdc.ivct.baseentity.BaseEntity;
 import ca.drdc.ivct.entityagent.Controller;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
 import hla.rti1516e.exceptions.ConnectionFailed;
 import hla.rti1516e.exceptions.CouldNotOpenFDD;
 import hla.rti1516e.exceptions.ErrorReadingFDD;
@@ -88,6 +88,7 @@ public interface HlaInterface {
      * HlaInterface factory generating concrete hlaInterface implementation
      */
     public static class Factory {
+        private Factory() {}
         public static HlaInterface newInterface(Controller controller) {
             return new HlaInterfaceImpl(controller);
         }

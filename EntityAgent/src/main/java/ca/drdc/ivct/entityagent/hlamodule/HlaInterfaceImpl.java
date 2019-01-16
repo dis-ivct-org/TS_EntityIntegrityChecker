@@ -26,13 +26,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ca.drdc.ivct.baseentity.BaseEntity;
 import ca.drdc.ivct.entityagent.Controller;
 import ca.drdc.ivct.hla.coders.entitytypecoders.EntityIdentifierStructCoder;
 import ca.drdc.ivct.hla.coders.entitytypecoders.EntityTypeStructCoder;
 import ca.drdc.ivct.hla.coders.spatialcoders.SpatialCoder;
-import ca.drdc.ivct.hlamodule.rpr.RprClass;
-import ca.drdc.ivct.hlamodule.rpr.RprPlatformPackage;
-import ca.drdc.ivct.tc_lib_integritycheck.baseentity.BaseEntity;
+import ca.drdc.ivct.hla.module.rpr.RprClass;
+import ca.drdc.ivct.hla.module.rpr.RprPlatformPackage;
 import hla.rti1516e.AttributeHandle;
 import hla.rti1516e.AttributeHandleSet;
 import hla.rti1516e.AttributeHandleValueMap;
@@ -84,6 +84,8 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
 
     private static Logger logger = LoggerFactory.getLogger(HlaInterfaceImpl.class);
 
+    private static final String DEFAULT_FAILURE_MSG = "HlaInterfaceFailure";
+
     private RTIambassador ambassador;
 
     private EntityTypeStructCoder entTypeStructCoder;
@@ -121,7 +123,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
             ambassador.connect(this, CallbackModel.HLA_IMMEDIATE, localSettingsDesignator);
         } catch (AlreadyConnected ignored) {
         } catch (UnsupportedCallbackModel | CallNotAllowedFromWithinCallback e) {
-            throw new RTIinternalError("HlaInterfaceFailure", e);
+            throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
         }
 
         try {
@@ -157,7 +159,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
         } catch (FederateAlreadyExecutionMember ignored) {
         } catch (CouldNotCreateLogicalTimeFactory | FederationExecutionDoesNotExist
                 | CallNotAllowedFromWithinCallback e) {
-            throw new RTIinternalError("HlaInterfaceFailure", e);
+            throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
         }
 
         try {
@@ -165,7 +167,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
 
             registerPublicationBaseEntity();
         } catch (FederateNotExecutionMember e) {
-            throw new RTIinternalError("HlaInterfaceFailure", e);
+            throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
         }
     }
 
@@ -182,27 +184,27 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
                 logger.error("HlaInterface.stop: FederateNotExecutionMember exception: ", ignored);
             } catch (FederateOwnsAttributes e) {
                 logger.error("HlaInterface.stop: FederateOwnsAttributes exception: ", e);
-                throw new RTIinternalError("HlaInterfaceFailure", e);
+                throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
             } catch (OwnershipAcquisitionPending e) {
                 logger.error("HlaInterface.stop: OwnershipAcquisitionPending exception: ", e);
-                throw new RTIinternalError("HlaInterfaceFailure", e);
+                throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
             } catch (CallNotAllowedFromWithinCallback e) {
                 logger.error("HlaInterface.stop: CallNotAllowedFromWithinCallback1 exception: ", e);
-                throw new RTIinternalError("HlaInterfaceFailure", e);
+                throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
             } catch (InvalidResignAction e) {
                 logger.error("HlaInterface.stop: InvalidResignAction exception: ", e);
-                throw new RTIinternalError("HlaInterfaceFailure", e);
+                throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
             }
 
             try {
                 ambassador.disconnect();
             } catch (FederateIsExecutionMember e) {
                 logger.error("HlaInterface.stop: FederateIsExecutionMember exception: ", e);
-                throw new RTIinternalError("HlaInterfaceFailure", e);
+                throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
 
             } catch (CallNotAllowedFromWithinCallback e) {
                 logger.error("HlaInterface.stop: CallNotAllowedFromWithinCallback exception: ", e);
-                throw new RTIinternalError("HlaInterfaceFailure", e);
+                throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
             }
         } catch (NotConnected ignored) {
             logger.error("HlaInterface.stop: NotConnected exception: ", ignored);
@@ -223,7 +225,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
             attrSpatial = ambassador.getAttributeHandle(rprPlatform.getClassHandles().get(RprClass.BASE_ENTITY.getName()), "Spatial");
 
         } catch (NameNotFound | InvalidObjectClassHandle e) {
-            throw new RTIinternalError("HlaInterfaceFailure", e);
+            throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
         }
     }
 
@@ -241,7 +243,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
                     baseEntAttrSet);
 
         } catch (AttributeNotDefined | ObjectClassNotDefined e) {
-            throw new RTIinternalError("HlaInterfaceFailure", e);
+            throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
         } catch (NameNotFound e) {
             logger.error("Class Handles Name Not Found", e);
         }
@@ -273,7 +275,7 @@ class HlaInterfaceImpl extends NullFederateAmbassador implements HlaInterface {
         } catch (ObjectInstanceNotKnown | AttributeNotDefined | AttributeNotOwned | ObjectClassNotPublished
                 | ObjectClassNotDefined | NameNotFound e) {
 
-            throw new RTIinternalError("HlaInterfaceFailure", e);
+            throw new RTIinternalError(DEFAULT_FAILURE_MSG, e);
         }
     }
 

@@ -7,7 +7,7 @@ dependencies {
         case "prti1516e":
             logger.warn (':TS_EntityIntegrityChecker:pRTI is used. Make sure pRTI is installed on target machine to run TS_EntityIntegrityChecker')
             compileOnly files (rti_lib + "/" + rti_jar)
-            compile fileTree (dir: rti_lib, include: '*.jar')
+            runtime fileTree (dir: rti_lib, include: '*.jar')
             break
         case "mak":
             logger.warn (':TS_EntityIntegrityChecker:MAK RTI is not configure. TS_EntityIntegrityChecker will not be runnable')
@@ -18,8 +18,8 @@ dependencies {
     }
     compile        project(':IVCT_HLA_BaseEntity')
 
-    compile        group: 'org.apache.commons',    name: 'commons-math', version: '2.2'
-    compile        group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    compileOnly        group: 'org.apache.commons',    name: 'commons-math', version: '2.2'
+    compileOnly        group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 
     compileOnly    group: 'msg134-ivct-framework', name: 'TC.lib', version: ivctVersion
     compileOnly    group: 'msg134-ivct-framework', name: 'MessagingHelpers', version: ivctVersion
