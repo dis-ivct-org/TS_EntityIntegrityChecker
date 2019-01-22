@@ -4,7 +4,7 @@
   "rtiPort" : "8989",
   "sutFederateName" : "EntityAgent",
   "fadFiles" :  [
-    { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/fad/baseentity_simple_tc.csv" }
+    { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/testcases/baseentity_simple_tc.csv" }
   ],
   "fomFiles"        : [
     { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/fom/EntityIdTestFOM.xml"},
