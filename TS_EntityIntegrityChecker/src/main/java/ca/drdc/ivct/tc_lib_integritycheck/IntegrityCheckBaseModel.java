@@ -30,8 +30,8 @@ import ca.drdc.ivct.baseentity.EntityType;
 import ca.drdc.ivct.hla.coders.entitytypecoders.EntityIdentifierStructCoder;
 import ca.drdc.ivct.hla.coders.entitytypecoders.EntityTypeStructCoder;
 import ca.drdc.ivct.hla.coders.spatialcoders.SpatialCoder;
+import ca.drdc.ivct.utils.EqualUtils;
 import de.fraunhofer.iosb.tc_lib.IVCT_RTIambassador;
-import de.fraunhofer.iosb.tc_lib.IVCT_TcParam;
 import de.fraunhofer.iosb.tc_lib.TcFailed;
 import de.fraunhofer.iosb.tc_lib.TcInconclusive;
 import de.fraunhofer.iosb.tc_lib.IVCT_BaseModel;
@@ -76,16 +76,18 @@ public class IntegrityCheckBaseModel extends IVCT_BaseModel {
     private IVCT_RTIambassador ivctRti;
     private final Map<ObjectInstanceHandle, BaseEntity> discoveredEntities = new HashMap<>();
     private Logger logger;
+    private Map<String, Double> spatialThresold;
 
     /**
      * @param logger reference to a logger
      * @param ivctRti reference to the RTI ambassador
      * @param ivctTcParam ivct_TcParam
      */
-    public IntegrityCheckBaseModel(Logger logger, IVCT_RTIambassador ivctRti, IVCT_TcParam ivctTcParam) {
+    public IntegrityCheckBaseModel(Logger logger, IVCT_RTIambassador ivctRti, IntegrityCheckTcParam ivctTcParam) {
         super(ivctRti, logger, ivctTcParam);
         this.logger = logger;
         this.ivctRti = ivctRti;
+        this.spatialThresold = ivctTcParam.getSpatialValueThreshold();
     }
 
     /**
@@ -288,7 +290,11 @@ public class IntegrityCheckBaseModel extends IVCT_BaseModel {
                 logger.debug("\nFrom fad:{}\nFrom fed:{}",
                         fadEntity.getSpatialRepresentation(),
                         optionalBase.get().getSpatialRepresentation());
-                fadEntityPassesTest = fadEntity.getSpatialRepresentation().equals(optionalBase.get().getSpatialRepresentation());
+
+                fadEntityPassesTest = new EqualUtils(spatialThresold).baseEntitySpatialEqual(
+                        fadEntity.getSpatialRepresentation(), 
+                        optionalBase.get().getSpatialRepresentation());
+
                 if (!fadEntityPassesTest) {
                     testPassed = false;
                     logger.info("---------------------------------------------------------------------");

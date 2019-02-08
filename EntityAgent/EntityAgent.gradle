@@ -7,8 +7,8 @@ dependencies {
     switch (rti) {
         case "prti1516e":
             logger.warn (':EntAgent:pRTI is used. Make sure pRTI is installed on target machine to run EntAgentFederate')
-            compileOnly files (rti_lib + "/" + rti_jar)
-            runtime fileTree (dir: rti_lib, include: '*.jar')
+            compile files (rti_lib + "/" + rti_jar)
+            compile fileTree (dir: rti_lib, include: '*.jar')
             break
         case "mak":
             logger.warn (':EntAgent:MAK RTI is not configure. EntAgentFederate will not be runnable')

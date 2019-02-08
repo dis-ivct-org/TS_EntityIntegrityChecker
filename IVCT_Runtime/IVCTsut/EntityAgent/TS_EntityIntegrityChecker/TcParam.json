@@ -3,6 +3,13 @@
   "rtiHostName" : "192.168.48.24",
   "rtiPort" : "8989",
   "sutFederateName" : "EntityAgent",
+  "thresholds": { 
+    "worldLocation": 0.001,
+    "orientation":0.0001,
+    "velocity":0.001,
+    "acceleration":0.001,
+    "angularVelocity":0.0001
+  },
   "fadFiles" :  [
     { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/testcases/baseentity_simple_tc.csv" }
   ],

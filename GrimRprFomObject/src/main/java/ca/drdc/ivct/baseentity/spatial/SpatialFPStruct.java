@@ -92,6 +92,7 @@ public class SpatialFPStruct implements SpatialRepresentation {
         this.orientation = orientation;
     }
 
+    @Override
     public VelocityVectorStruct getVelocityVector() {
         return velocityVector;
     }

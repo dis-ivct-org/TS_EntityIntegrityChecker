@@ -87,6 +87,7 @@ public class SpatialRVStruct implements SpatialRepresentation {
         return worldLocation;
     }
     
+    @Override
     public boolean isFrozen() {
         return frozen;
     }
@@ -95,6 +96,7 @@ public class SpatialRVStruct implements SpatialRepresentation {
         this.frozen = frozen;
     }
 
+    @Override
     public OrientationStruct getOrientation() {
         return orientation;
     }
@@ -103,6 +105,7 @@ public class SpatialRVStruct implements SpatialRepresentation {
         this.orientation = orientation;
     }
 
+    @Override
     public VelocityVectorStruct getVelocityVector() {
         return velocityVector;
     }
@@ -127,6 +130,7 @@ public class SpatialRVStruct implements SpatialRepresentation {
         this.accelerationVector = accelerationVector;
     }
 
+    @Override
     public DeadReckoningAlgorithm getDeadReckoningAlgorithm() {
         return deadReckoningAlgorithm;
     }

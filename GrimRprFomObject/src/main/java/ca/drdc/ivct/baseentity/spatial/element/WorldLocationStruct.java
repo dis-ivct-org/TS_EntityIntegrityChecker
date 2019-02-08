@@ -26,9 +26,6 @@ import java.util.StringTokenizer;
  */
 public class WorldLocationStruct {
 
-    // Threshold value for validation in meter
-    private static final double THRESHOLD = 0.001; // 1 mm
-
     /**
      * Distance from the origin along the X axis.
      */
@@ -91,38 +88,6 @@ public class WorldLocationStruct {
 
     public void setzPosition(double zPosition) {
         this.zPosition = zPosition;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        long temp;
-        temp = Double.doubleToLongBits(xPosition);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(yPosition);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(zPosition);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        WorldLocationStruct other = (WorldLocationStruct) obj;
-        if (Math.abs(this.xPosition - other.xPosition) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.yPosition - other.yPosition) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.zPosition - other.zPosition) >= THRESHOLD)
-            return false;
-        return true;
     }
 
     @Override
