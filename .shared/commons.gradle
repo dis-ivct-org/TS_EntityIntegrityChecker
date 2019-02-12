@@ -15,6 +15,9 @@ allprojects {
     repositories {
 		mavenLocal()
 		mavenCentral()
+		maven {
+			url 'https://oss.sonatype.org/content/repositories/snapshots'
+		}
 	}
     
     ext {
@@ -166,7 +169,7 @@ configure(leafProjects) {
 //  1) /gradlew which is the *NIX shell script for executing builds
 //  2) /gradlew.bat which is the windows bat script for for executing builds
 //  3) /wrapper which is a directory named by the "jarPath" config which contains other needed files.
-wrapper {
+task wrapper(type: Wrapper) {
     description = 'Generates the Gradle wrapper stuff, e.g. gradlew.'
     gradleVersion = gradleWrapperVersion
 }
