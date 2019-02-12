@@ -26,9 +26,6 @@ import java.util.StringTokenizer;
  */
 public class AngularVelocityVectorStruct {
 
-    // Threshold value for validation in radians/s
-    private static final float THRESHOLD = (float) 0.0001; // 10^-4 radians/s
-
     /**
      *Magnitude of the change in rotation around the X axis. in rad/s
      */
@@ -92,34 +89,6 @@ public class AngularVelocityVectorStruct {
 
     public void setzAngularVelocity(float zAngularVelocity) {
         this.zAngularVelocity = zAngularVelocity;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Float.floatToIntBits(xAngularVelocity);
-        result = prime * result + Float.floatToIntBits(yAngularVelocity);
-        result = prime * result + Float.floatToIntBits(zAngularVelocity);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AngularVelocityVectorStruct other = (AngularVelocityVectorStruct) obj;
-        if (Math.abs(this.xAngularVelocity - other.xAngularVelocity) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.yAngularVelocity - other.yAngularVelocity) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.zAngularVelocity- other.zAngularVelocity) >= THRESHOLD)
-            return false;
-        return true;
     }
 
     @Override

@@ -25,9 +25,6 @@ import java.util.StringTokenizer;
  */
 public class VelocityVectorStruct {
 
-    // Threshold value for validation in m/s
-    private static final double THRESHOLD = 0.001; // or 3,6 meter/h
-
     /**
      * Velocity component along the X axis. (Meter per second)
      */
@@ -90,34 +87,6 @@ public class VelocityVectorStruct {
 
     public void setzVelocity(float zVelocity) {
         this.zVelocity = zVelocity;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Float.floatToIntBits(xVelocity);
-        result = prime * result + Float.floatToIntBits(yVelocity);
-        result = prime * result + Float.floatToIntBits(zVelocity);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        VelocityVectorStruct other = (VelocityVectorStruct) obj;
-        if (Math.abs(this.xVelocity - other.xVelocity) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.yVelocity - other.yVelocity) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.zVelocity - other.zVelocity) >= THRESHOLD)
-            return false;
-        return true;
     }
 
     @Override

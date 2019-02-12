@@ -26,9 +26,6 @@ import ca.drdc.ivct.utils.AngleUtils;
  */
 public class OrientationStruct {
 
-    // Threshold value for validation in radians
-    private static final float THRESHOLD = (float) 0.0001; // 10^-4 rad or 0.0057 degrees
-
     /**
      * Rotation about the Z axis.(Radian)
      */
@@ -96,34 +93,6 @@ public class OrientationStruct {
 
     public void setPhi(float phi) {
         this.phi = (float) AngleUtils.normalizeAngle(phi,  Math.PI);
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Float.floatToIntBits(phi);
-        result = prime * result + Float.floatToIntBits(psi);
-        result = prime * result + Float.floatToIntBits(theta);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        OrientationStruct other = (OrientationStruct) obj;
-        if (Math.abs(this.phi - other.phi) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.psi - other.psi) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.theta- other.theta) >= THRESHOLD)
-            return false;
-        return true;
     }
 
     @Override

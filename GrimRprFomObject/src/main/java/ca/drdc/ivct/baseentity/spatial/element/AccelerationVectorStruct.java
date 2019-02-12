@@ -26,9 +26,6 @@ import java.util.StringTokenizer;
  */
 public class AccelerationVectorStruct {
 
-    // Threshold value for validation in m/s²
-    private static final float THRESHOLD = (float) 0.001;
-
     /**
      * Acceleration component along the X axis. m/s²
      */
@@ -88,34 +85,6 @@ public class AccelerationVectorStruct {
 
     public void setzAcceleration(float zAcceleration) {
         this.zAcceleration = zAcceleration;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Float.floatToIntBits(xAcceleration);
-        result = prime * result + Float.floatToIntBits(yAcceleration);
-        result = prime * result + Float.floatToIntBits(zAcceleration);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        AccelerationVectorStruct other = (AccelerationVectorStruct) obj;
-        if (Math.abs(this.xAcceleration - other.xAcceleration) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.yAcceleration - other.yAcceleration) >= THRESHOLD)
-            return false;
-        if (Math.abs(this.zAcceleration - other.zAcceleration) >= THRESHOLD)
-            return false;
-        return true;
     }
 
     @Override

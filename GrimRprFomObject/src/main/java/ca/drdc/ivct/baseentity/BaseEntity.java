@@ -50,7 +50,6 @@ public class BaseEntity {
         return this.entityType;
     }
 
-    
     /**
      * @return the identifier value
      */

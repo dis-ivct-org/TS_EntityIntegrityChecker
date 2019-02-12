@@ -20,7 +20,11 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -47,6 +51,8 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
     private URL[] fadUrls;
 
     private String settingsDesignator;
+    
+    private Map<String, Double> spatialValueThreshold;
 
 
     public IntegrityCheckTcParam(final String paramJson) throws TcInconclusive {
@@ -84,6 +90,14 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
                 throw new TcInconclusive("The key fomFiles was not found");
             } else {
                 this.fomUrls = jsonArrayToUrlList(fomArray);
+            }
+
+            spatialValueThreshold = new HashMap<>();
+            
+            JSONObject thresholds = (JSONObject) jsonObject.get("thresholds");
+            List<String> thresholdsKey = Arrays.asList("worldLocation","orientation","velocity","acceleration","angularVelocity");
+            for (String key : thresholdsKey) {
+                spatialValueThreshold.put(key, (Double) thresholds.get(key));
             }
 
         } catch (ParseException e) {
@@ -142,5 +156,9 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
 
     public URL[] getFadUrls() {
         return fadUrls;
+    }
+
+    public Map<String, Double> getSpatialValueThreshold() {
+        return spatialValueThreshold;
     }
 }

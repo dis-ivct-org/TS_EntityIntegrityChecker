@@ -18,6 +18,7 @@ package ca.drdc.ivct.baseentity.spatial;
 
 import ca.drdc.ivct.baseentity.spatial.element.DeadReckoningAlgorithm;
 import ca.drdc.ivct.baseentity.spatial.element.OrientationStruct;
+import ca.drdc.ivct.baseentity.spatial.element.VelocityVectorStruct;
 import ca.drdc.ivct.baseentity.spatial.element.WorldLocationStruct;
 
 public interface SpatialRepresentation {
@@ -50,4 +51,9 @@ public interface SpatialRepresentation {
      */
     DeadReckoningAlgorithm getDeadReckoningAlgorithm();
     
+    /**
+     * 
+     * @return VelocityVectorStruct The velocity Vector of the Entity
+     */
+    VelocityVectorStruct getVelocityVector();
 }
