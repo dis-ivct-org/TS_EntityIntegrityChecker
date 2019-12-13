@@ -54,6 +54,7 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
     
     private Map<String, Double> spatialValueThreshold;
 
+    private int waitingPeriod;
 
     public IntegrityCheckTcParam(final String paramJson) throws TcInconclusive {
         JSONParser jsonParser = new JSONParser();
@@ -100,6 +101,7 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
                 spatialValueThreshold.put(key, (Double) thresholds.get(key));
             }
 
+            waitingPeriod = ((Long) jsonObject.get("waitingPeriod")).intValue();
         } catch (ParseException e) {
             throw new TcInconclusive("Invalid configuration file", e);
         }
@@ -133,7 +135,6 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
     /**
      * @return the federation name
      */
-    @Override
     public String getFederationName() {
         return this.federationName;
     }
@@ -141,7 +142,6 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
     /**
      * @return the settings designator
      */
-    @Override
     public String getSettingsDesignator() {
         return this.settingsDesignator;
     }
@@ -160,5 +160,9 @@ public class IntegrityCheckTcParam implements IVCT_TcParam {
 
     public Map<String, Double> getSpatialValueThreshold() {
         return spatialValueThreshold;
+    }
+
+    public int getWaitingPeriod() {
+        return waitingPeriod;
     }
 }

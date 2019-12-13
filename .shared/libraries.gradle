@@ -1,30 +1,28 @@
 // Provides a map of the dependency artifacts to use.
 // Allows centralized definition of the version of artifacts to use.
 ext {
-
-
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~ Gradle Build Environment
-		//artifactCache = "${artifactory_contextUrl}/gradle"
+	//artifactCache = "${artifactory_contextUrl}/gradle"
         gradleVersion = '4.9'
         gradleWrapperVersion = "${gradleVersion}"
 
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ IVCT settings
-		ivctVersion = '1.0.2-SNAPSHOT'
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~ IVCT settings
+	ivctVersion = '1.0.2-SNAPSHOT'
 		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ EntityIntegrityChecker settings
-		TS_EntityIntegrityCheckerVersion = '1.0.1'
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~ EntityIntegrityChecker settings
+	TS_EntityIntegrityCheckerVersion = '1.0.1'
 
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ testing
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~ testing
         junitVersion = '4.+'
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~ thirdparty
-		logbackVersion = '1.1.3'
-		slf4jVersion = '1.7.10'
+	logbackVersion = '1.1.3'
+	slf4jVersion = '1.7.10'
 		
 
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~  now create libraries with the versions from above
-		libraries = [
-				tc_lib:							"io.github.msg134:TC-lib:${ivctVersion}",
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~  now create libraries with the versions from above
+	libraries = [
+		tc_lib:				"io.github.msg134:TC-lib:${ivctVersion}",
 
 
                 // ~~~~~~~~~~~~~~~~~~~~~~~~~~ thirdparty

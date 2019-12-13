@@ -17,65 +17,24 @@
 
 package ca.drdc.ivct.entityagent.hlamodule;
 
+import ca.drdc.ivct.coders.base.structs.EntityIdentifierStructCoder;
+import ca.drdc.ivct.coders.base.structs.EntityTypeStructCoder;
+import ca.drdc.ivct.coders.base.structs.SpatialCoder;
+import ca.drdc.ivct.entityagent.Controller;
+import ca.drdc.ivct.fom.base.BaseEntity;
+import ca.drdc.ivct.hla.module.rpr.RprClass;
+import ca.drdc.ivct.hla.module.rpr.RprPlatformPackage;
+import hla.rti1516e.*;
+import hla.rti1516e.encoding.EncoderFactory;
+import hla.rti1516e.exceptions.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import ca.drdc.ivct.baseentity.BaseEntity;
-import ca.drdc.ivct.entityagent.Controller;
-import ca.drdc.ivct.hla.coders.entitytypecoders.EntityIdentifierStructCoder;
-import ca.drdc.ivct.hla.coders.entitytypecoders.EntityTypeStructCoder;
-import ca.drdc.ivct.hla.coders.spatialcoders.SpatialCoder;
-import ca.drdc.ivct.hla.module.rpr.RprClass;
-import ca.drdc.ivct.hla.module.rpr.RprPlatformPackage;
-import hla.rti1516e.AttributeHandle;
-import hla.rti1516e.AttributeHandleSet;
-import hla.rti1516e.AttributeHandleValueMap;
-import hla.rti1516e.CallbackModel;
-import hla.rti1516e.NullFederateAmbassador;
-import hla.rti1516e.ObjectInstanceHandle;
-import hla.rti1516e.RTIambassador;
-import hla.rti1516e.ResignAction;
-import hla.rti1516e.RtiFactory;
-import hla.rti1516e.RtiFactoryFactory;
-import hla.rti1516e.encoding.EncoderFactory;
-import hla.rti1516e.exceptions.AlreadyConnected;
-import hla.rti1516e.exceptions.AttributeNotDefined;
-import hla.rti1516e.exceptions.AttributeNotOwned;
-import hla.rti1516e.exceptions.CallNotAllowedFromWithinCallback;
-import hla.rti1516e.exceptions.ConnectionFailed;
-import hla.rti1516e.exceptions.CouldNotCreateLogicalTimeFactory;
-import hla.rti1516e.exceptions.CouldNotOpenFDD;
-import hla.rti1516e.exceptions.ErrorReadingFDD;
-import hla.rti1516e.exceptions.FederateAlreadyExecutionMember;
-import hla.rti1516e.exceptions.FederateInternalError;
-import hla.rti1516e.exceptions.FederateIsExecutionMember;
-import hla.rti1516e.exceptions.FederateNameAlreadyInUse;
-import hla.rti1516e.exceptions.FederateNotExecutionMember;
-import hla.rti1516e.exceptions.FederateOwnsAttributes;
-import hla.rti1516e.exceptions.FederateServiceInvocationsAreBeingReportedViaMOM;
-import hla.rti1516e.exceptions.FederatesCurrentlyJoined;
-import hla.rti1516e.exceptions.FederationExecutionAlreadyExists;
-import hla.rti1516e.exceptions.FederationExecutionDoesNotExist;
-import hla.rti1516e.exceptions.InconsistentFDD;
-import hla.rti1516e.exceptions.InvalidLocalSettingsDesignator;
-import hla.rti1516e.exceptions.InvalidObjectClassHandle;
-import hla.rti1516e.exceptions.InvalidResignAction;
-import hla.rti1516e.exceptions.NameNotFound;
-import hla.rti1516e.exceptions.NotConnected;
-import hla.rti1516e.exceptions.ObjectClassNotDefined;
-import hla.rti1516e.exceptions.ObjectClassNotPublished;
-import hla.rti1516e.exceptions.ObjectInstanceNotKnown;
-import hla.rti1516e.exceptions.OwnershipAcquisitionPending;
-import hla.rti1516e.exceptions.RTIinternalError;
-import hla.rti1516e.exceptions.RestoreInProgress;
-import hla.rti1516e.exceptions.SaveInProgress;
-import hla.rti1516e.exceptions.UnsupportedCallbackModel;
 
 /*
  * This class implements the HlaInterface.
