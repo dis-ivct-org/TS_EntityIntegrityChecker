@@ -1,0 +1,11 @@
+{
+	"id" 			: 	"DisEntitySut",
+	"name"			:	"DisEntitySut",
+	"description"	:	"DisEntitySut system for DIS IVCT",
+	"vendor"		:	"OODA Technologies / DRDC Atlantics",
+	"badge"			:	["TS_DisBaseEntityIntegrityChecker"],
+	"settingsDesignator": "",
+	"sutFederateName": "DisEntitySut",
+	"federationName": "IVCT_DIS_Federation",
+	"version": "0.1"
+}

@@ -1,0 +1,17 @@
+{
+	"id" 			: 	"TS_DisBaseEntityIntegrityChecker",
+	"version"		:	"1.0.1",
+	"name" 			: 	"TS_DisBaseEntityIntegrityChecker",
+	"description"	:	"This is a test to verify the integrity of a list of object injected in the federation by a sut.",
+	"graphics"		:	"someicon.png",
+	"tsRunTimeFolder":	"TS_DisBaseEntityIntegrityChecker-1.0.1/bin",
+	"tsLibTimeFolder":	"TS_DisBaseEntityIntegrityChecker-1.0.1/lib",
+    "dependency"	:	[],
+	"requirements"	:	[
+		{
+			"id"			:	"DisBaseEntityIntegrityTC_0001",
+			"description"	:	"HLA Entity Integrity Tester for identity match",
+			"TC"			:	"ca.drdc.ivct.tc_integritycheck_dis.BaseEntityIntegrityTC_0001"
+		}
+	]
+}

@@ -1,0 +1,25 @@
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+mainClassName = 'ca.drdc.ivct.tc_integritycheck_dis.BaseEntityIntegrityTC_0001'
+
+dependencies {
+
+    compile files ("/opt/openDis/open-dis_4.16.jar")
+    compile files ("/opt/openDis/dis-enums_1.1.jar")
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+
+    compile        group: 'io.github.ivctool', name: 'IVCT_DIS_plugin', version: "${modelEncoderVersion}"
+    compile        group: 'io.github.ivctool', name: 'GrimRprFom', version: "${modelEncoderVersion}"
+    compileOnly    group: 'io.github.msg134',  name: 'TC.lib', version: "${ivctVersion}"
+    compileOnly    group: 'io.github.ivctool', name: 'MessagingHelpers', version: "${ivctVersion}"
+}
+
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}

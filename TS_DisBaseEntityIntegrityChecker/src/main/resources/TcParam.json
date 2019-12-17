@@ -1,0 +1,8 @@
+{
+  "federationName" : "IVCT_DIS_Federation",
+  "rtiHostName" : "192.168.48.27",
+  "rtiPort" : "30001",
+  "fadFiles" :  [
+    { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/testcases/baseentity_simple_tc.csv" }
+  ]
+}
