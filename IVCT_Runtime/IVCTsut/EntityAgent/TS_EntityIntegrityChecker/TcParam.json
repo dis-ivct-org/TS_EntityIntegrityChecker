@@ -1,6 +1,6 @@
 {
   "federationName" : "IVCT_Federation",
-  "rtiHostName" : "192.168.48.24",
+  "rtiHostName" : "127.0.0.1",
   "rtiPort" : "8989",
   "sutFederateName" : "EntityAgent",
   "thresholds": { 
@@ -10,6 +10,7 @@
     "acceleration":0.001,
     "angularVelocity":0.0001
   },
+  "waitingPeriod": 10,
   "fadFiles" :  [
     { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/testcases/baseentity_simple_tc.csv" }
   ],

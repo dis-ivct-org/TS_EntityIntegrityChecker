@@ -1,7 +1,6 @@
 include 'TS_EntityIntegrityChecker'
 include 'EntityAgent'
-include 'GrimRprFomObject' 
-include 'IVCT_HLA_BaseEntity' 
+include 'IVCT_HLA_BaseEntity'
 
 rootProject.children.each { project ->
     project.buildFileName = "${project.name}.gradle"

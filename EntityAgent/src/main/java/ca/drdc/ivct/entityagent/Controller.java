@@ -17,28 +17,21 @@
 
 package ca.drdc.ivct.entityagent;
 
+import ca.drdc.ivct.entityagent.hlamodule.HlaInterface;
+import ca.drdc.ivct.fom.base.BaseEntity;
+import ca.drdc.ivct.fom.utils.BaseEntityCSVReader;
+import hla.rti1516e.AttributeHandleValueMap;
+import hla.rti1516e.ObjectInstanceHandle;
+import hla.rti1516e.exceptions.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.naming.ConfigurationException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.naming.ConfigurationException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import ca.drdc.ivct.baseentity.BaseEntity;
-import ca.drdc.ivct.entityagent.hlamodule.HlaInterface;
-import ca.drdc.ivct.utils.CSVReader;
-import hla.rti1516e.AttributeHandleValueMap;
-import hla.rti1516e.ObjectInstanceHandle;
-import hla.rti1516e.exceptions.FederateNotExecutionMember;
-import hla.rti1516e.exceptions.NotConnected;
-import hla.rti1516e.exceptions.RTIexception;
-import hla.rti1516e.exceptions.RTIinternalError;
-import hla.rti1516e.exceptions.RestoreInProgress;
-import hla.rti1516e.exceptions.SaveInProgress;
 
 public class Controller {
 
@@ -70,7 +63,7 @@ public class Controller {
         }
 
         // Load all files in testcases folder. This constitutes the federation agreement document (FAD)
-        List<BaseEntity> fad = CSVReader.loadCSVFileToBaseEntityList(config.getTestcaseList(), logger);
+        List<BaseEntity> fad = BaseEntityCSVReader.loadCSVFileToBaseEntityList(config.getTestcaseList());
 
         // Create BaseEntity objects in RTI
         for (BaseEntity baseEntity : fad) {

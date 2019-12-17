@@ -17,19 +17,9 @@
 
 package ca.drdc.ivct.entityagent.hlamodule;
 
-import ca.drdc.ivct.baseentity.BaseEntity;
 import ca.drdc.ivct.entityagent.Controller;
-import hla.rti1516e.exceptions.ConnectionFailed;
-import hla.rti1516e.exceptions.CouldNotOpenFDD;
-import hla.rti1516e.exceptions.ErrorReadingFDD;
-import hla.rti1516e.exceptions.FederateNotExecutionMember;
-import hla.rti1516e.exceptions.FederateServiceInvocationsAreBeingReportedViaMOM;
-import hla.rti1516e.exceptions.InconsistentFDD;
-import hla.rti1516e.exceptions.InvalidLocalSettingsDesignator;
-import hla.rti1516e.exceptions.NotConnected;
-import hla.rti1516e.exceptions.RTIinternalError;
-import hla.rti1516e.exceptions.RestoreInProgress;
-import hla.rti1516e.exceptions.SaveInProgress;
+import ca.drdc.ivct.fom.base.BaseEntity;
+import hla.rti1516e.exceptions.*;
 
 public interface HlaInterface {
 

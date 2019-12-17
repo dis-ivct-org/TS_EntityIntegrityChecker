@@ -1,11 +1,12 @@
 {
   "federationName" : "IVCT_Federation",
-  "rtiHostName" : "192.168.48.24",
+  "rtiHostName" : "127.0.0.1",
   "rtiPort" : "8989",
   "sutFederateName" : "EntityAgent",
   "fadFiles" :  [
     { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/fad/baseentity_simple_tc.csv" }
   ],
+  "waitingPeriod": 10,
   "fomFiles"        : [
     { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/fom/EntityIdTestFOM.xml"},
     { "fileName"    : "$(IVCT_SUT_HOME_ID)/EntityAgent/resources/fom/RPR-Aggregate_v2.0.xml"},

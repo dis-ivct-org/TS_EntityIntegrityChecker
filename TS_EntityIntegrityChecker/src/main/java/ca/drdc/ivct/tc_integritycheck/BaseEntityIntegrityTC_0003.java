@@ -16,25 +16,18 @@
  *******************************************************************************/
 package ca.drdc.ivct.tc_integritycheck;
 
+import ca.drdc.ivct.fom.base.BaseEntity;
+import ca.drdc.ivct.fom.utils.BaseEntityCSVReader;
+import ca.drdc.ivct.tc_lib_integritycheck.CountdownTimer;
+import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckBaseModel;
+import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckTcParam;
+import de.fraunhofer.iosb.tc_lib.*;
+import org.slf4j.Logger;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
-
-import org.slf4j.Logger;
-
-import ca.drdc.ivct.baseentity.BaseEntity;
-import ca.drdc.ivct.tc_lib_integritycheck.CountdownTimer;
-import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckBaseModel;
-import ca.drdc.ivct.tc_lib_integritycheck.IntegrityCheckTcParam;
-import ca.drdc.ivct.utils.CSVReader;
-import de.fraunhofer.iosb.tc_lib.AbstractTestCase;
-import de.fraunhofer.iosb.tc_lib.IVCT_BaseModel;
-import de.fraunhofer.iosb.tc_lib.IVCT_LoggingFederateAmbassador;
-import de.fraunhofer.iosb.tc_lib.IVCT_RTI_Factory;
-import de.fraunhofer.iosb.tc_lib.IVCT_RTIambassador;
-import de.fraunhofer.iosb.tc_lib.TcFailed;
-import de.fraunhofer.iosb.tc_lib.TcInconclusive;
 
 public class BaseEntityIntegrityTC_0003 extends AbstractTestCase {
 
@@ -44,7 +37,6 @@ public class BaseEntityIntegrityTC_0003 extends AbstractTestCase {
     private IVCT_LoggingFederateAmbassador loggingFedAmbassador;
     private IntegrityCheckBaseModel baseEntityDataModel;
     private List<BaseEntity> fad ;
-    private static final int FIVE_SECOND = 5;
 
     @Override
     protected IVCT_BaseModel getIVCT_BaseModel(String tcParamJson, Logger logger) throws TcInconclusive {
@@ -87,7 +79,7 @@ public class BaseEntityIntegrityTC_0003 extends AbstractTestCase {
 
         // Load all files in test cases folder. This constitutes the federation agreement document (FAD)
         try {
-            this.fad = CSVReader.loadCSVFileToBaseEntityList(Arrays.asList(tcParam.getFadUrls()), logger);
+            this.fad = BaseEntityCSVReader.loadCSVFileToBaseEntityList(Arrays.asList(tcParam.getFadUrls()));
             if (fad.isEmpty()) {
                 throw new TcInconclusive("The FAD is empty.");
             }
@@ -96,7 +88,7 @@ public class BaseEntityIntegrityTC_0003 extends AbstractTestCase {
         }
 
         // Let five second to IVCT federation client to discover entity.
-        new CountdownTimer(FIVE_SECOND, logger).run();
+        new CountdownTimer(tcParam.getWaitingPeriod(), logger).run();
     }
 
     /**

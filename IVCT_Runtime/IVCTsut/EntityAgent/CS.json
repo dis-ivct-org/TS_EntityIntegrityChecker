@@ -1,6 +1,13 @@
 {
-	"id" 			: 	"EntityAgent",
-	"description"	:	"EntityAgent system under federate for IVCT demonstration",
-	"vendor"		:	"OODA Technologies / DRDC Atlantics",
-	"badge"			:	["TS_EntityIntegrityChecker"]
+  "id": "EntityAgent",
+  "name": "EntityAgent",
+  "description": "EntityAgent system under federate for IVCT demonstration",
+  "vendor": "OODA Technologies / DRDC Atlantics",
+  "badge": [
+    "TS_EntityIntegrityChecker"
+  ],
+  "settingsDesignator": "",
+  "sutFederateName": "EntityAgent",
+  "federationName": "IVCT_Federation",
+  "version": "0.1"
 }

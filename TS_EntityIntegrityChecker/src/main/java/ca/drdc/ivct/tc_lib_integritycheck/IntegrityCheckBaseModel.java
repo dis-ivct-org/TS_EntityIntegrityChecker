@@ -17,48 +17,26 @@
 
 package ca.drdc.ivct.tc_lib_integritycheck;
 
+import ca.drdc.ivct.coders.base.structs.EntityIdentifierStructCoder;
+import ca.drdc.ivct.coders.base.structs.EntityTypeStructCoder;
+import ca.drdc.ivct.coders.base.structs.SpatialCoder;
+import ca.drdc.ivct.fom.base.BaseEntity;
+import ca.drdc.ivct.fom.base.structs.EntityIdentifierStruct;
+import ca.drdc.ivct.fom.base.structs.EntityTypeStruct;
+import ca.drdc.ivct.fom.utils.BaseEntityEqualUtils;
+import de.fraunhofer.iosb.tc_lib.IVCT_BaseModel;
+import de.fraunhofer.iosb.tc_lib.IVCT_RTIambassador;
+import de.fraunhofer.iosb.tc_lib.TcFailed;
+import de.fraunhofer.iosb.tc_lib.TcInconclusive;
+import hla.rti1516e.*;
+import hla.rti1516e.encoding.DecoderException;
+import hla.rti1516e.exceptions.*;
+import org.slf4j.Logger;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import org.slf4j.Logger;
-
-import ca.drdc.ivct.baseentity.BaseEntity;
-import ca.drdc.ivct.baseentity.EntityIdentifier;
-import ca.drdc.ivct.baseentity.EntityType;
-import ca.drdc.ivct.hla.coders.entitytypecoders.EntityIdentifierStructCoder;
-import ca.drdc.ivct.hla.coders.entitytypecoders.EntityTypeStructCoder;
-import ca.drdc.ivct.hla.coders.spatialcoders.SpatialCoder;
-import ca.drdc.ivct.utils.EqualUtils;
-import de.fraunhofer.iosb.tc_lib.IVCT_RTIambassador;
-import de.fraunhofer.iosb.tc_lib.TcFailed;
-import de.fraunhofer.iosb.tc_lib.TcInconclusive;
-import de.fraunhofer.iosb.tc_lib.IVCT_BaseModel;
-import hla.rti1516e.AttributeHandle;
-import hla.rti1516e.AttributeHandleSet;
-import hla.rti1516e.AttributeHandleValueMap;
-import hla.rti1516e.FederateAmbassador;
-import hla.rti1516e.FederateHandle;
-import hla.rti1516e.LogicalTime;
-import hla.rti1516e.MessageRetractionHandle;
-import hla.rti1516e.ObjectClassHandle;
-import hla.rti1516e.ObjectInstanceHandle;
-import hla.rti1516e.OrderType;
-import hla.rti1516e.TransportationTypeHandle;
-import hla.rti1516e.encoding.DecoderException;
-import hla.rti1516e.exceptions.AttributeNotDefined;
-import hla.rti1516e.exceptions.FederateHandleNotKnown;
-import hla.rti1516e.exceptions.FederateInternalError;
-import hla.rti1516e.exceptions.FederateNotExecutionMember;
-import hla.rti1516e.exceptions.InvalidFederateHandle;
-import hla.rti1516e.exceptions.InvalidObjectClassHandle;
-import hla.rti1516e.exceptions.NameNotFound;
-import hla.rti1516e.exceptions.NotConnected;
-import hla.rti1516e.exceptions.ObjectClassNotDefined;
-import hla.rti1516e.exceptions.RTIinternalError;
-import hla.rti1516e.exceptions.RestoreInProgress;
-import hla.rti1516e.exceptions.SaveInProgress;
 
 /**
  *  Base Model container for Integrity check testing.
@@ -291,9 +269,27 @@ public class IntegrityCheckBaseModel extends IVCT_BaseModel {
                         fadEntity.getSpatialRepresentation(),
                         optionalBase.get().getSpatialRepresentation());
 
-                fadEntityPassesTest = new EqualUtils(spatialThresold).baseEntitySpatialEqual(
+                BaseEntityEqualUtils equalUtils = new BaseEntityEqualUtils(spatialThresold);
+
+                boolean worldEqual = equalUtils.worlLocationEqual(fadEntity.getSpatialRepresentation().getWorldLocation(), optionalBase.get().getSpatialRepresentation().getWorldLocation());
+
+
+                //The rest of the spatialIntegrity check is still performed but does not affect the final judgment.
+                boolean orientationEqual = equalUtils.orientationEqual(fadEntity.getSpatialRepresentation().getOrientation(),  optionalBase.get().getSpatialRepresentation().getOrientation());
+                boolean velocityEqual = equalUtils.velocityEqual(fadEntity.getSpatialRepresentation().getVelocityVector(), optionalBase.get().getSpatialRepresentation().getVelocityVector());
+                fadEntityPassesTest = equalUtils.baseEntityDeadReckonEqual(
                         fadEntity.getSpatialRepresentation(), 
-                        optionalBase.get().getSpatialRepresentation());
+                        optionalBase.get().getSpatialRepresentation()) && orientationEqual && velocityEqual;
+                if (worldEqual == true) {
+
+                    if (fadEntityPassesTest == false) {
+                        logger.warn("WARNING: The entities worldLoc match but not the other spatial information. For now, this discrepancy does not affect the outcome of the Test.");
+                        fadEntityPassesTest = true;
+                    }
+
+                } else {
+                    fadEntityPassesTest = false;
+                }
 
                 if (!fadEntityPassesTest) {
                     testPassed = false;
@@ -362,9 +358,9 @@ public class IntegrityCheckBaseModel extends IVCT_BaseModel {
             try {
                 EntityIdentifierStructCoder entityIdentifierStructCoder = new EntityIdentifierStructCoder(ivctRti.getEncoderFactory());
                 EntityTypeStructCoder entityTypeStructCoder = new EntityTypeStructCoder(ivctRti.getEncoderFactory());
-                
-                EntityIdentifier entityIdentifier = entityIdentifierStructCoder.decodeToType(theAttributes.get(this.attrEntityIdentifier));
-                EntityType entityType = entityTypeStructCoder.decodeToType(theAttributes.get(this.attrEntityType));
+
+                EntityIdentifierStruct entityIdentifier = entityIdentifierStructCoder.decodeToType(theAttributes.get(this.attrEntityIdentifier));
+                EntityTypeStruct entityType = entityTypeStructCoder.decodeToType(theAttributes.get(this.attrEntityType));
                 
                 baseEntity.setEntityIdentifier(entityIdentifier);
                 baseEntity.setEntityType(entityType);
