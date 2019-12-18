@@ -9,7 +9,7 @@ ext {
         gradleWrapperVersion = "${gradleVersion}"
 
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ IVCT settings
-		ivctVersion = '2.2.0'
+		ivctVersion = '2.2.1'
 		modelEncoderVersion = "1.0.0"
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ EntityIntegrityChecker settings
